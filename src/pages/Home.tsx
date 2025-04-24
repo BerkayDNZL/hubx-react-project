@@ -1,12 +1,10 @@
+import HeaderSlider from "../components/Header/HeaderSlider/HeaderSlider";
 
 const Home = () => {
     return (
-        <>
-            <header>
-                <h1>HubX Frontend Case - Berkay YILDIRIM</h1>
-            </header>
-        </>
+        <main className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+            <HeaderSlider />
+        </main>
     );
 };
-
 export default Home;
