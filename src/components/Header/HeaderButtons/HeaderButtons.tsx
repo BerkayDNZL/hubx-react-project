@@ -1,4 +1,6 @@
 import { FC } from "react";
+import { buttonLabels } from "../HeaderSlider/HeaderSliderHelper";
+import images from "../../../assets/images";
 
 interface IHeaderButtons {
   onSelect: (currentIndex: number) => void;
@@ -6,19 +8,21 @@ interface IHeaderButtons {
 }
 
 export const HeaderButtons: FC<IHeaderButtons> = (props) => {
-  const labels = ["1", "2", "3", "4"];
   const { onSelect, currentIndex } = props;
 
   return (
-    <div className="flex justify-center mt-4 gap-4">
-      {labels.map((label, idx) => (
+    <div className="grid grid-cols-5 w-full relative bg-white border-gray-200 font-sf items-center">
+      {buttonLabels.map((label, idx) => (
         <button
           key={idx}
           onClick={() => onSelect(idx)}
-          className={`w-10 h-10 rounded-full border-2 ${idx === currentIndex ? "bg-blue-500 text-white" : "bg-white"
-            } hover:bg-blue-400 transition`}
-        >
-          {label}
+          className={`w-full h-full py-4 border-2 flex items-center justify-center gap-4 ${idx === currentIndex ? "bg-activeButtonBacground" : "bg-white"} hover:bg-activeButtonBacground transition`}>
+          <div className="rounded-full bg-white w-[56px] h-[56px] flex items-center justify-center border-[1px] border-gray-200">
+            {<img
+              src={images.DocumentScannerIcon}
+            />}
+          </div>
+          <span className="text-[16px] leading-[1]">{label.title}</span>
         </button>
       ))}
     </div>

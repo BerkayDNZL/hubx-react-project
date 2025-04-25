@@ -1,26 +1,29 @@
 import { useState } from "react";
-import { animationVariants } from "../animations";
 import { HeaderButtons } from "../HeaderButtons/HeaderButtons";
 import { HeaderImage } from "../HeaderImage/HeaderImage";
-import images from "../../../assets/images";
+import { slideSectionImages, slideSectionTexts } from "./HeaderSliderHelper";
+import { HeaderTextSection } from "../HeaderTextSection/HeaderTextSection";
 
-const slides = [
-    { src: images.SliderImage1, animation: animationVariants.slideFromRight },
-    { src: images.SliderImage2, animation: animationVariants.slideFromBottom },
-    { src: images.SliderImage3, animation: animationVariants.zoomIn },
-    { src: images.SliderImage4, animation: animationVariants.rotateIn },
-];
+
 
 const HeaderSlider = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
-    const current = slides[currentIndex];
+    const currentImage = slideSectionImages[currentIndex];
+    const currentText = slideSectionTexts[currentIndex];
 
     return (
-        <div className="w-full max-w-5xl mx-auto">
-            <div className="relative h-[400px] w-full overflow-hidden bg-black rounded-xl">
-                <HeaderImage src={current.src} animation={current.animation} />
+        <div className="w-[1440px] h-screen mx-auto flex items-center ">
+            <div className="relative  h-[730px] overflow-hidden shadow-2xl bg-white px-6">
+                <div className="flex items-center justify-center w-full">
+                    <div className="w-1/2">
+                        <HeaderImage src={currentImage.src} animation={currentImage.animation} />
+                    </div>
+                    <div className="w-1/2">
+                        <HeaderTextSection mainTitle={currentText.mainTitle} subTitle={currentText.subTitle} description={currentText.description} onButtomClick={() => { }} />
+                    </div>
+                </div>
+                <HeaderButtons onSelect={setCurrentIndex} currentIndex={currentIndex} />
             </div>
-            <HeaderButtons onSelect={setCurrentIndex} currentIndex={currentIndex} />
         </div>
     );
 };
