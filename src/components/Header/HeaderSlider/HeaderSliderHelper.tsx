@@ -1,14 +1,12 @@
 import images from "../../../assets/images";
-import { animationVariants } from "../animations";
 
 export const slideSectionImages = [
-    { src: images.SliderImage1, animation: animationVariants.slideFromBottom },
-    { src: images.SliderImage2, animation: animationVariants.slideFromRight },
-    { src: images.SliderImage3, animation: animationVariants.zoomIn },
-    { src: images.SliderImage4, animation: animationVariants.rotateIn },
-    { src: images.SliderImage5, animation: animationVariants.slideFromBottom },
+    { src: images.SliderImage1, extraImages: [], extraAnimation: null },
+    { src: images.SliderImage2, extraImages: [{ src: images.SliderImage2MiniImage1, top: 'calc(50% + 80px)', left: '60px' }, { src: images.SliderImage2MiniImage2, top: 'calc(50% - 20px)', left: '420px' }], extraAnimation: "scaleIn" },
+    { src: images.SliderImage3, extraImages: [{ src: images.SliderImage3MiniImage1, top: '280px' }, { src: images.SliderImage3MiniImage1, top: '320px' }, { src: images.SliderImage3MiniImage1, top: '360px' }], extraAnimation: "centerImagesFromBottom" },
+    { src: images.SliderImage4, extraImages: [{ src: images.SliderImage4MiniImage1, top: 'calc(50% + 50px)', left: '124px' }, { src: images.SliderImage4MiniImage2, top: 'calc(50% + 50px)', left: '504px' }], extraAnimation: "fadeIn" },
+    { src: images.SliderImage5, extraImages: [{ src: images.SliderImage5MiniImage1, top: '50px', left: '50px' }, { src: images.SliderImage5MiniImage2, top: '30px', left: '80px' }, { src: images.SliderImage5MiniImage3, top: '10px', left: '224px' }, { src: images.SliderImage5MiniImage4, top: '30px', left: '360px' }], extraAnimation: "distributedInTheMiddle" },
 ];
-
 
 export const slideSectionTexts = [
     { mainTitle: "Document Scanner", subTitle: "Scan with Ease", description: "Scan any document instantly with your mobile device by just a few steps. Save as PDF,JPG,ZIP,TXT and Word format." },
@@ -18,11 +16,10 @@ export const slideSectionTexts = [
     { mainTitle: "Export & Share", subTitle: "All-Round Conversion", description: "Export your scans as PDF,JPG,ZIP,TXT and Word." },
 ];
 
-
 export const buttonLabels = [
-    {title: "Document Scanner", icon: "Scan with Ease"},
-    {title: "Sign & Stamp", icon: "Scan with Ease"},
-    {title: "Batch Scanning", icon: "Scan with Ease"},
-    {title: "Advanced Filters", icon: "Scan with Ease"},
-    {title: "Export & Share", icon: "Scan with Ease"},
+    { title: "Document Scanner", icon: "Scan with Ease" },
+    { title: "Sign & Stamp", icon: "Scan with Ease" },
+    { title: "Batch Scanning", icon: "Scan with Ease" },
+    { title: "Advanced Filters", icon: "Scan with Ease" },
+    { title: "Export & Share", icon: "Scan with Ease" },
 ];

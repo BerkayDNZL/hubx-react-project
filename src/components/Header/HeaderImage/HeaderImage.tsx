@@ -1,27 +1,74 @@
-import { FC, useEffect, useRef } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
+import { animationVariants } from "../animations";
+
+export type SliderType = "scaleIn" | "fadeIn" | "centerImagesFromBottom" | null;
+interface ExtraImage {
+  src: string;
+  top?: string;
+  left?: string;
+}
 
 interface IHeaderImage {
   src: string;
-  animation: any;
+  extraImages?: ExtraImage[];
+  extraAnimation: SliderType;
 }
 
-export const HeaderImage: FC<IHeaderImage> = ({ src, animation }) => {
-  const imgRef = useRef<HTMLImageElement | null>(null);
+export const HeaderImage: FC<IHeaderImage> = ({ src, extraImages = [], extraAnimation }) => {
+  const mainImgRef = useRef<HTMLImageElement | null>(null);
+  const extraImgRefs = useRef<(HTMLImageElement | null)[]>([]);
+  const [extraImagesVisible, setExtraImagesVisible] = useState(false);
 
   useEffect(() => {
-    if (imgRef.current) {
-      const { from, to } = animation;
-      gsap.fromTo(imgRef.current, from, { ...to, duration: 1.5, ease: "power3.out" });
+    setExtraImagesVisible(false);
+    if (mainImgRef.current) {
+      const { from, to } = animationVariants.slideFromBottom;
+      gsap.fromTo(mainImgRef.current, from, {
+        ...to,
+        duration: 1.2,
+        ease: "power3.out",
+        onComplete: () => setExtraImagesVisible(true)
+      });
     }
-  }, [src, animation]);
+  }, [src]);
+
+  useEffect(() => {
+    if (extraImagesVisible && extraAnimation) {
+      extraImgRefs.current.forEach((img, index) => {
+        if (img) {
+          const { from, to, delay } = animationVariants[extraAnimation](index);
+          gsap.fromTo(
+            img,
+            from,
+            { ...to, duration: 1.3, ease: "power3.out", delay }
+          );
+        }
+      });
+    }
+  }, [extraImagesVisible, extraAnimation]);
 
   return (
-    <img
-      ref={imgRef}
-      src={src}
-      alt="Slider"
-      className="max-h-full max-w-full  drop-shadow-xl"
-    />
+    <div className="relative flex items-center justify-center w-full h-full">
+      <img
+        ref={mainImgRef}
+        src={src}
+        alt="Main Slider"
+        className="max-h-full max-w-full drop-shadow-xl"
+      />
+      {extraImagesVisible && extraImages.map((extraSrc, idx) => (
+        <img
+          key={idx}
+          ref={(el) => (extraImgRefs.current[idx] = el)}
+          src={extraSrc.src}
+          alt={`Extra ${idx}`}
+          style={{
+            left: extraSrc.left,
+            top: extraSrc.top ?? '50%',
+          }}
+          className={`absolute -translate-y-1/2 `}
+        />
+      ))}
+    </div>
   );
 };
