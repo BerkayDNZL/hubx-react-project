@@ -1,7 +1,7 @@
 export default {
   content: [
     "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}", // Bütün component dosyalarını tarar
+    "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {

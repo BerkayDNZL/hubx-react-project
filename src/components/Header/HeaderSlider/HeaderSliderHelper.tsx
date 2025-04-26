@@ -2,10 +2,10 @@ import images from "../../../assets/images";
 
 export const slideSectionImages = [
     { src: images.SliderImage1, extraImages: [], extraAnimation: null },
-    { src: images.SliderImage2, extraImages: [{ src: images.SliderImage2MiniImage1, top: 'calc(50% + 80px)', left: '60px' }, { src: images.SliderImage2MiniImage2, top: 'calc(50% - 20px)', left: '420px' }], extraAnimation: "scaleIn" },
-    { src: images.SliderImage3, extraImages: [{ src: images.SliderImage3MiniImage1, top: '280px' }, { src: images.SliderImage3MiniImage1, top: '320px' }, { src: images.SliderImage3MiniImage1, top: '360px' }], extraAnimation: "centerImagesFromBottom" },
-    { src: images.SliderImage4, extraImages: [{ src: images.SliderImage4MiniImage1, top: 'calc(50% + 50px)', left: '124px' }, { src: images.SliderImage4MiniImage2, top: 'calc(50% + 50px)', left: '504px' }], extraAnimation: "fadeIn" },
-    { src: images.SliderImage5, extraImages: [{ src: images.SliderImage5MiniImage1, top: '50px', left: '50px' }, { src: images.SliderImage5MiniImage2, top: '30px', left: '80px' }, { src: images.SliderImage5MiniImage3, top: '10px', left: '224px' }, { src: images.SliderImage5MiniImage4, top: '30px', left: '360px' }], extraAnimation: "distributedInTheMiddle" },
+    { src: images.SliderImage2, extraImages: [{ src: images.SliderImage2MiniImage1, bottom: '0', left: '-3em' }, { src: images.SliderImage2MiniImage2, bottom: '4em', right: '-4em' }], extraAnimation: "scaleIn" },
+    { src: images.SliderImage3, extraImages: [{ src: images.SliderImage3MiniImage1, left: '15%', bottom: '-8em' }, { src: images.SliderImage3MiniImage1, left: '15%', bottom: '-11em' }, { src: images.SliderImage3MiniImage1, left: '15%', bottom: '-14em' }], extraAnimation: "centerImagesFromBottom" },
+    { src: images.SliderImage4, extraImages: [{ src: images.SliderImage4MiniImage1, bottom: '-11em', left: '0.5em' }, { src: images.SliderImage4MiniImage2, bottom: '-11em', right: '0.5em' }], extraAnimation: "fadeIn" },
+    { src: images.SliderImage5, extraImages: [{ src: images.SliderImage5MiniImage1, bottom: '24em', left: '-5%' }, { src: images.SliderImage5MiniImage2, bottom: '18em', left: '-8%' }, { src: images.SliderImage5MiniImage3, bottom: '21em', left: '30%' }, { src: images.SliderImage5MiniImage4, bottom: '18em', right: '-8%' }], extraAnimation: "distributedInTheMiddle" },
 ];
 
 export const slideSectionTexts = [

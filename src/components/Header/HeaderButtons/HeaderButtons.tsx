@@ -15,6 +15,7 @@ interface IHeaderButtons {
 export const HeaderButtons: FC<IHeaderButtons> = ({ onSelect, currentIndex }) => {
   const borderRefs = useRef<(HTMLDivElement | null)[]>([]);
   const animRefs = useRef<gsap.core.Tween[]>([]);
+  const prevIndex = useRef<number>(currentIndex);
 
   const buttonIcons = [
     <DocumentScannerIcon color={currentIndex === 0 ? "#0381FF" : '#666666'} />,
@@ -27,42 +28,67 @@ export const HeaderButtons: FC<IHeaderButtons> = ({ onSelect, currentIndex }) =>
   useEffect(() => {
     borderRefs.current.forEach((ref, idx) => {
       animRefs.current[idx]?.kill();
-      if (ref) {
-        if (idx === currentIndex) {
-          const anim = gsap.fromTo(
-            ref,
-            { "--angle": "0deg" },
-            {
-              "--angle": "360deg",
-              duration: 0.5,
-              ease: "linear",
-              onUpdate: () => {
-                ref.style.setProperty(
-                  "background",
-                  `conic-gradient(from 0deg, #e5e7eb calc(360deg - var(--angle)), #0381ff 0deg)`
-                );
-              },
-              onComplete: () => {
-                ref.style.setProperty(
-                  "background",
-                  `conic-gradient(from 0deg, #0381ff 360deg, #0381ff 360deg)`
-                );
-              },
-            }
-          );
-          animRefs.current[idx] = anim;
-        } else {
-          ref.style.setProperty(
-            "background",
-            `conic-gradient(from 0deg, #e5e7eb 360deg, #e5e7eb 360deg)`
-          );
-        }
-      }
     });
+
+    const prev = prevIndex.current;
+    const next = currentIndex;
+
+    if (borderRefs.current[prev]) {
+      const prevRef = borderRefs.current[prev];
+      gsap.fromTo(
+        prevRef,
+        { "--angle": "0deg" },
+        {
+          "--angle": "360deg",
+          duration: 0.5,
+          ease: "linear",
+          onUpdate: () => {
+            prevRef!.style.setProperty(
+              "background",
+              `conic-gradient(from 0deg, #e5e7eb var(--angle), #0381ff 0deg)`
+            );
+          },
+          onComplete: () => {
+            prevRef!.style.setProperty(
+              "background",
+              `conic-gradient(from 0deg, #e5e7eb 360deg, #e5e7eb 360deg)`
+            );
+          },
+        }
+      );
+    }
+
+    if (borderRefs.current[next]) {
+      const nextRef = borderRefs.current[next];
+      const anim = gsap.fromTo(
+        nextRef,
+        { "--angle": "0deg" },
+        {
+          "--angle": "360deg",
+          duration: 0.5,
+          ease: "linear",
+          onUpdate: () => {
+            nextRef!.style.setProperty(
+              "background",
+              `conic-gradient(from 0deg, #e5e7eb calc(360deg - var(--angle)), #0381ff 0deg)`
+            );
+          },
+          onComplete: () => {
+            nextRef!.style.setProperty(
+              "background",
+              `conic-gradient(from 0deg, #0381ff 360deg, #0381ff 360deg)`
+            );
+          },
+        }
+      );
+      animRefs.current[next] = anim;
+    }
+
+    prevIndex.current = currentIndex;
   }, [currentIndex]);
 
   return (
-    <div className="grid grid-cols-5 w-full relative bg-white font-sf items-center">
+    <div className="flex relative bg-white font-sf items-center overflow-x-auto snap-x snap-mandatory scroll-smooth min-w-full touch-pan-x no-scrollbar">
       {buttonLabels.map((label, idx) => {
         const isActive = idx === currentIndex;
 
@@ -70,9 +96,11 @@ export const HeaderButtons: FC<IHeaderButtons> = ({ onSelect, currentIndex }) =>
           <button
             key={idx}
             onClick={() => onSelect(idx)}
-            className={`w-full h-full py-4 border-2 flex items-center justify-center gap-4
-              ${isActive ? "bg-activeButtonBacground border-transparent" : "bg-white border-gray-200 hover:border-buttonBorderColor"}
-              transition-all duration-300 ease-in-out`}
+            className={`flex-shrink-0 md:flex-shrink md:flex-grow h-full py-4 px-6 md:px-0 flex items-center justify-center gap-4 snap-start border-2 
+            ${isActive ? "bg-activeButtonBacground border-transparent" : "bg-white border-transparent"}
+            ${idx !== buttonLabels.length - 1 ? "border-r-gray-200" : ""}
+            ${!isActive ? "hover:border-buttonBorderColor hover:border-r-buttonBorderColor" : ""}
+            transition-all duration-300 ease-in-out`}
           >
             <div
               className="w-[3.5rem] h-[3.5rem] rounded-full p-[2px]"
@@ -85,7 +113,7 @@ export const HeaderButtons: FC<IHeaderButtons> = ({ onSelect, currentIndex }) =>
                 {buttonIcons[idx]}
               </div>
             </div>
-            <span className="text-[16px] leading-[1]">{label.title}</span>
+            <span className="text-base leading-[1] whitespace-nowrap">{label.title}</span>
           </button>
         );
       })}
