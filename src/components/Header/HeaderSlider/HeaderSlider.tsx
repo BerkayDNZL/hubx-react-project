@@ -4,8 +4,6 @@ import { HeaderImage, SliderType } from "../HeaderImage/HeaderImage";
 import { slideSectionImages, slideSectionTexts } from "./HeaderSliderHelper";
 import { HeaderTextSection } from "../HeaderTextSection/HeaderTextSection";
 
-
-
 const HeaderSlider = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const currentImage = slideSectionImages[currentIndex];

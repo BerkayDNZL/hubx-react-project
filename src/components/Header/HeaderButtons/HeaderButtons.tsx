@@ -18,11 +18,11 @@ export const HeaderButtons: FC<IHeaderButtons> = ({ onSelect, currentIndex }) =>
   const prevIndex = useRef<number>(currentIndex);
 
   const buttonIcons = [
-    <DocumentScannerIcon color={currentIndex === 0 ? "#0381FF" : '#666666'} />,
-    <SignAndStamp color={currentIndex === 1 ? "#0381FF" : '#666666'} />,
-    <BatchScanning color={currentIndex === 2 ? "#0381FF" : '#666666'} />,
-    <AdvancedFilters color={currentIndex === 3 ? "#0381FF" : '#666666'} />,
-    <ExportAndShare color={currentIndex === 4 ? "#0381FF" : '#666666'} />,
+    <DocumentScannerIcon key="doc" color={currentIndex === 0 ? "#0381FF" : '#666666'} />,
+    <SignAndStamp key="sign" color={currentIndex === 1 ? "#0381FF" : '#666666'} />,
+    <BatchScanning key="batch" color={currentIndex === 2 ? "#0381FF" : '#666666'} />,
+    <AdvancedFilters key="filter" color={currentIndex === 3 ? "#0381FF" : '#666666'} />,
+    <ExportAndShare key="export" color={currentIndex === 4 ? "#0381FF" : '#666666'} />
   ];
 
   useEffect(() => {

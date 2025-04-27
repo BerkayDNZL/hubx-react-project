@@ -9,7 +9,7 @@ export const ExportAndShare: FC<IExportAndShare> = ({ color }) => {
     return (
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g id="Iconly/Bulk/Time Circle">
-                <g id="export (1) 1" clip-path="url(#clip0_896_408)">
+                <g id="export (1) 1" clipPath="url(#clip0_896_408)">
                     <g id="Group">
                         <g id="Group_2">
                             <path id="Vector" d="M22.8476 7.46876L17.8594 2.48038V7.46876H22.8476Z" fill={color} />
